@@ -165,6 +165,43 @@ public class DoAnJava {
             System.out.println("Không tìm thấy đồ ăn có tên \"" + name + "\".");
         }
     }
+    private static void sortFoods() {
+        Collections.sort(foods, new Comparator<Food>() {
+            public int compare(Food food1, Food food2) {
+                return Double.compare(food1.getPrice(), food2.getPrice());
+            }
+        });
+        System.out.println("Danh sách đồ ăn đã được sắp xếp theo giá tiền từ bé đến lớn.");
+        displayFoods();
+    }
+    private static void statisticFoods() {
+        HashMap<String, Integer> typeCount = new HashMap<>();
+        HashMap<String, Integer> stockCount = new HashMap<>();
+        HashMap<String, Double> valueCount = new HashMap<>();
+
+        for (Food food : foods) {
+            // Thống kê số lượng theo loại
+            typeCount.put(food.getType(), typeCount.getOrDefault(food.getType(), 0) + 1);
+
+            // Thống kê số lượng tồn kho theo loại
+            stockCount.put(food.getType(), stockCount.getOrDefault(food.getType(), 0) + 1);
+
+            // Thống kê tổng giá trị theo loại
+            valueCount.put(food.getType(), valueCount.getOrDefault(food.getType(), 0.0) + food.getPrice());
+        }
+
+        System.out.println("╔══════════════╦══════════╦══════════════════╦═════════════════════╗");
+        System.out.println("║ Loại đồ ăn   │ Số lượng │ Số lượng tồn kho │ Tổng giá trị        ║");
+        System.out.println("╠══════════════╪══════════╪══════════════════╪═════════════════════╣");
+        for (String type : typeCount.keySet()) {
+            System.out.printf("║ %-12s │ %-8d │ %-16d │ %-20.0f║\n", type, typeCount.get(type), stockCount.get(type), valueCount.get(type));
+        System.out.println("╟──────────────┼──────────┼──────────────────┼─────────────────────╢");
+        }
+        System.out.println("╚══════════════╧══════════╧══════════════════╧═════════════════════╝");
+
+    }
+
+    
     
 
   
