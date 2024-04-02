@@ -139,6 +139,33 @@ public class DoAnJava {
             System.out.println("Không tìm thấy đồ ăn có tên \"" + name + "\".");
         }
     }
+    private static void updateFood(Scanner scanner) {
+        System.out.print("Nhập tên đồ ăn cần sửa: ");
+        String name = scanner.nextLine();
+        boolean found = false;
+        for (int i = 0; i < foods.size(); i++) {
+            Food food = foods.get(i);
+            if (food.getName().equalsIgnoreCase(name)) {
+                System.out.println("Nhập thông tin mới cho đồ ăn \"" + name + "\":");
+                System.out.print("Tên: ");
+                String newName = scanner.nextLine();
+                System.out.print("Giá tiền: ");
+                double newPrice = scanner.nextDouble();
+                System.out.print("Loại đồ ăn: ");
+                String newType = scanner.nextLine();
+                // Cập nhật thông tin của đối tượng Food trong danh sách
+                food = new Food(newName, newPrice, newType);
+                foods.set(i, food); // Cập nhật lại đối tượng trong danh sách
+                System.out.println("Đã cập nhật thông tin cho đồ ăn \"" + name + "\".");
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Không tìm thấy đồ ăn có tên \"" + name + "\".");
+        }
+    }
+    
 
   
 }
